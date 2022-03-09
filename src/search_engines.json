@@ -1,0 +1,150 @@
+{
+   "google": {
+     "p": "q",
+     "n": "google",
+     "regex": true
+    },
+    "yahoo.com": {
+        "p": "p",
+        "n": "yahoo"
+    },
+    "msn.com": {
+        "p": "q",
+        "n": "msn"
+    },
+    "bing.com": {
+        "p": "q",
+        "n": "bing"
+    },
+    "duckduckgo.com": {
+        "n": "duckduckgo"
+    },
+    "daum.net": {
+      "p": "q",
+      "n": "daum"
+    },
+    "eniro.se": {
+      "p": "search_word",
+      "n": "eniro "
+     },
+    "naver.com": {
+      "p": "query",
+      "n": "naver "
+    },
+    "aol.com": {
+      "p": "q",
+      "n": "aol"
+    },
+    "lycos.com": {
+      "p": "q",
+      "n": "lycos"
+    },
+    "ask.com": {
+      "p": "q",
+      "n": "ask"
+    },
+    "altavista.com": {
+      "p": "q",
+      "n": "altavista"
+    },
+    "search.netscape.com": {
+      "p": "query",
+      "n": "netscape"
+    },
+    "cnn.com": {
+      "p": "query",
+      "n": "cnn"
+    },
+    "about.com": {
+      "p": "terms",
+      "n": "about"
+    },
+    "mamma.com": {
+      "p": "query",
+      "n": "mama"
+    },
+    "alltheweb.com": {
+      "p": "q",
+      "n": "alltheweb"
+    },
+    "voila.fr": {
+      "p": "rdata",
+      "n": "voila"
+    },
+    "search.virgilio.it": {
+      "p": "qs",
+      "n": "virgilio"
+    },
+    "baidu.com": {
+      "p": "wd",
+      "n": "baidu"
+    },
+    "alice.com": {
+      "p": "qs",
+      "n": "alice"
+    },
+    "yandex.com": {
+      "p": "text",
+      "n": "yandex"
+    },
+    "najdi.org.mk": {
+      "p": "q",
+      "n": "najdi"
+    },
+    "seznam.cz": {
+      "p": "q",
+      "n": "seznam"
+    },
+    "search.com": {
+      "p": "q",
+      "n": "search"
+    },
+    "wp.pl": {
+      "p": "szukaj ",
+      "n": "wirtulana polska"
+    },
+    "online.onetcenter.org": {
+      "p": "qt",
+      "n": "o*net"
+    },
+    "szukacz.pl": {
+      "p": "q",
+      "n": "szukacz"
+    },
+    "yam.com": {
+      "p": "k",
+      "n": "yam"
+    },
+    "pchome.com": {
+      "p": "q",
+      "n": "pchome"
+    },
+    "kvasir.no": {
+      "p": "q",
+      "n": "kvasir"
+    },
+    "sesam.no": {
+      "p": "q",
+      "n": "sesam"
+    },
+    "ozu.es": {
+      "p": "q",
+      "n": "ozu "
+    },
+    "terra.com": {
+      "p": "query",
+      "n": "terra"
+    },
+    "mynet.com": {
+      "p": "q",
+      "n": "mynet"
+    },
+   "ekolay.net": {
+      "p": "q",
+      "n": "ekolay"
+   },
+   "rambler.ru": {
+     "p": "words",
+     "n": "rambler"
+   }
+ }
