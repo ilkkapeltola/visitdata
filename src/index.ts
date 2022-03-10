@@ -1,8 +1,6 @@
 import paidUrlParamsConfig from './click_identifiers.json';
 import searchEngineConfig from './search_engines.json';
 
-console.log(paidUrlParamsConfig);
-
 export function rawData() {
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
@@ -114,7 +112,6 @@ function getSearchEngineData(referringDomain: string, urlParamsObject: urlParams
 
   for (const key in filteredSearchEngineConfig) {
     if (referringDomain.match(key) != null) {
-      console.log("you are here");
       return {
         'source': searchEngineConfig[key]["n"],
         'medium': "organic"

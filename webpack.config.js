@@ -15,10 +15,10 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'ga-emulator.js',
+    filename: 'visitdata.js',
     path: path.resolve(__dirname, 'dist'),
     library: {
-      name: 'gaEmulator',
+      name: 'visitData',
       type: 'umd'
     }
   },
