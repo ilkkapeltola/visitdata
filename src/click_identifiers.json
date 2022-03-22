@@ -1,0 +1,22 @@
+{
+    "gclid": {
+        "source": "google",
+        "medium": "cpc"
+    },
+    "dclid": {
+        "source": "google",
+        "medium": "cpm"
+    },
+    "fbclid": {
+        "source": "facebook",
+        "medium": "cpc"
+    },
+    "msclkid": {
+        "source": "bing",
+        "medium": "cpc"
+    },
+    "gclsrc": {
+        "source": "google",
+        "medium": "cpc"
+    }
+}
