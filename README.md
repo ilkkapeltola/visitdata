@@ -7,7 +7,7 @@ Since there is no way to extract this information from ga.js directly, you need 
 ## Include from cdn
 
 Here's the file you can include in your web page directly from CDN:
-https://d2s9oqt5iwhaya.cloudfront.net/dist/1.0.0/visitdata.js
+https://cdn.ilkkapeltola.com/visitdatajs/latest/visitdata.js
 
 
 ## Build from source code
@@ -26,7 +26,7 @@ the javascript you need is at dist/visitdata.js
 I'm loading this from a CDN, but you might want to host the file yourself.
 
 ```html
-<script src="https://d2s9oqt5iwhaya.cloudfront.net/dist/1.0.0/visitsource.js"></script>
+<script src="https://cdn.ilkkapeltola.com/visitdatajs/latest/visitdata.js"></script>
 <script>console.log(visitData.get());</script>
 ```
 
@@ -39,3 +39,7 @@ I'm loading this from a CDN, but you might want to host the file yourself.
 ```
 
 You can also run `visitdata.rawData()` which will return a lot more information
+
+## Combine with globalStorage
+
+Typically you likely need this data elsewhere. If so, combine this with [globalStorage](https://github.com/ilkkapeltola/global-storage)
