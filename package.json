@@ -7,7 +7,7 @@
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
   },
-  "name": "ga-emulator",
+  "name": "visitdata",
   "description": "",
   "version": "1.0.0",
   "main": "webpack.config.js",
@@ -17,13 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ilkkapeltola/ga-emulator.git"
+    "url": "git+https://github.com/ilkkapeltola/visitdata.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ilkkapeltola/ga-emulator/issues"
+    "url": "https://github.com/ilkkapeltola/visitdata/issues"
   },
-  "homepage": "https://github.com/ilkkapeltola/ga-emulator#readme"
+  "homepage": "https://github.com/ilkkapeltola/visitdata#readme"
 }
