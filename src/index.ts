@@ -167,20 +167,16 @@ export function get() {
     };  
 }
 
-
 function getDomain_(url: string) {
-
-  if (!url) return;
-
-  var a = document.createElement('a');
-  a.href = url;
-
-  //
-
-  try {
-
-    return a.hostname.match(/[^.]*(\.[^.]{2,4}(?:\.[^.]{2,3})?$|\.[^.]{2,8}$)/)[0];
-
-  } catch(squelch) {}
-
+	url = (url.substring(0,4) == 'http' ? url : 'https://' + url);
+  var u = new URL (url);
+  var h = u.hostname;
+  var s = h.split('.');
+  var sl = s.slice(-2);
+  
+  if (['com', 'co'].includes(sl[0]) && sl.join('').length <= 5) {
+  	return s.slice(-3).join('.');
+  }
+  
+  return s.slice(-2).join('.');
 }
