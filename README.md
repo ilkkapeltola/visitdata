@@ -10,6 +10,10 @@ Here's the file you can include in your web page directly from CDN:
 https://cdn.ilkkapeltola.com/visitdatajs/latest/visitdata.js
 
 
+## Questions / Contact
+
+If you have any questions for this, drop me an email at [ilkkapel@gmail.com](mailto:ilkkapel@gmail.com)
+
 ## Build from source code
 
 clone this repository and then
