@@ -4,7 +4,7 @@ import searchEngineConfig from './search_engines.json';
 export function rawData() {
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
-  const referrer = document.referrer;
+  const referrer: string = document.referrer;
   // get only the top level domain of referrer
   const referringDomain = getDomain_(referrer);
   // get url parameters
@@ -168,15 +168,19 @@ export function get() {
 }
 
 function getDomain_(url: string) {
-	url = (url.substring(0,4) == 'http' ? url : 'https://' + url);
-  var u = new URL (url);
-  var h = u.hostname;
-  var s = h.split('.');
-  var sl = s.slice(-2);
-  
-  if (['com', 'co'].includes(sl[0]) && sl.join('').length <= 5) {
-  	return s.slice(-3).join('.');
+  try {
+    url = (url.substring(0,4) == 'http' ? url : 'https://' + url);
+    var u = new URL (url);
+    var h = u.hostname;
+    var s = h.split('.');
+    var sl = s.slice(-2);
+    
+    if (['com', 'co'].includes(sl[0]) && sl.join('').length <= 5) {
+      return s.slice(-3).join('.');
+    }
+    
+    return s.slice(-2).join('.');
+  } catch (e: any) {
+    return null
   }
-  
-  return s.slice(-2).join('.');
 }
