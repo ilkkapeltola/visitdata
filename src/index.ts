@@ -3,6 +3,7 @@ import searchEngineConfig from './search_engines.json';
 // second-level-domains that will be treated as exceptions
 import exceptionSLDs from './exception_slds.json';
 
+
 export function rawData() {
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
@@ -209,4 +210,3 @@ function getDomain_(url: string, ex_SDLs: string[] = exceptionSLDs): string | nu
 export const exportedForTesting = {
   getDomain_
 }
-

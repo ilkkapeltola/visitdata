@@ -7,8 +7,12 @@ Since there is no way to extract this information from ga.js directly, you need 
 ## Include from cdn
 
 Here's the file you can include in your web page directly from CDN:
-https://cdn.ilkkapeltola.com/visitdatajs/latest/visitdata.js
+https://cdn.visitdatajs.com/latest/visitdata.js
 
+
+## Questions / Contact
+
+If you have any questions for this, drop me an email at [ilkkapel@gmail.com](mailto:ilkkapel@gmail.com)
 
 ## Build from source code
 
@@ -26,7 +30,7 @@ the javascript you need is at dist/visitdata.js
 I'm loading this from a CDN, but you might want to host the file yourself.
 
 ```html
-<script src="https://cdn.ilkkapeltola.com/visitdatajs/latest/visitdata.js"></script>
+<script src="https://cdn.visitdatajs.com/latest/visitdata.js"></script>
 <script>console.log(visitData.get());</script>
 ```
 
