@@ -1,12 +1,15 @@
 import paidUrlParamsConfig from './click_identifiers.json';
 import searchEngineConfig from './search_engines.json';
+// second-level-domains that will be treated as exceptions
+import exceptionSLDs from './exception_slds.json';
+
 
 export function rawData() {
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
   const referrer: string = document.referrer;
   // get only the top level domain of referrer
-  const referringDomain = getDomain_(referrer);
+  const referringDomain = getDomain_(referrer, exceptionSLDs);
   // get url parameters
   const urlParams = new URLSearchParams(window.location.search);
   // then turn them into an object with key: value pairs
@@ -167,20 +170,43 @@ export function get() {
     };  
 }
 
-function getDomain_(url: string) {
+/**
+ * A function that returns the domain name without subdomain.
+ * While the function isn't perfect, it tries to account for common two-part top-level-domains 
+ * in such a fashion that if the second-level-domain is part of a pre-defined list and the
+ * full hostname has at least two dots, the function returns the join of the last three
+ * parts. In all other cases, the function returns the last two parts of the hostname.
+ *  
+ * @param {string} url - the url in question
+ * @param {ex_SDLs} exceptionSLDs - the JSON list of second-level-domain exceptions
+ * @returns {string} the domain name without subdomain
+*/
+function getDomain_(url: string, ex_SDLs: string[] = exceptionSLDs): string | null {
+  // if URL is null, return null
+  if (url === null) return null;
+  // if URL doesn't have http in the beginning, add https
+  
+  const getProtocol = () => window.location.protocol || 'https:';
+
+  url = (url.substring(0,4) == 'http' ? url : getProtocol() + '//' + url);
+  
   try {
-    url = (url.substring(0,4) == 'http' ? url : 'https://' + url);
-    var u = new URL (url);
-    var h = u.hostname;
-    var s = h.split('.');
-    var sl = s.slice(-2);
-    
-    if (['com', 'co'].includes(sl[0]) && sl.join('').length <= 5) {
-      return s.slice(-3).join('.');
+    const domain = new URL(url).hostname;
+    const sldSet = new Set(ex_SDLs);
+    const domainParts = domain.split('.');
+
+    if (
+      sldSet.has(domainParts.slice(-2,-1)[0]) && domainParts.length >= 3
+    ) {
+      return domainParts.slice(-3).join('.');
     }
-    
-    return s.slice(-2).join('.');
-  } catch (e: any) {
-    return null
+    return domainParts.slice(-2).join('.');
+
+  } catch (error) {
+    return null;
   }
+}
+
+export const exportedForTesting = {
+  getDomain_
 }
