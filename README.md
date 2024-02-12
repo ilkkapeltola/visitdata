@@ -43,7 +43,3 @@ I'm loading this from a CDN, but you might want to host the file yourself.
 ```
 
 You can also run `visitdata.rawData()` which will return a lot more information
-
-## Combine with globalStorage
-
-Typically you likely need this data elsewhere. If so, combine this with [globalStorage](https://github.com/ilkkapeltola/global-storage)
