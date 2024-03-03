@@ -4,15 +4,20 @@ visitdata.js emulates the source, medium, campaign, content and term data just l
 
 Since there is no way to extract this information from ga.js directly, you need a library like visitdata.js to do it.
 
-## Include from cdn
-
-Here's the file you can include in your web page directly from CDN:
-https://cdn.visitdatajs.com/latest/visitdata.js
-
-
 ## Questions / Contact
 
 If you have any questions for this, drop me an email at [ilkkapel@gmail.com](mailto:ilkkapel@gmail.com)
+
+## Include from cdn
+
+Here's the file you can include in your web page directly from CDN:
+https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js
+
+## Install with npm
+
+```
+npm install visitdata
+```
 
 ## Build from source code
 
@@ -27,10 +32,8 @@ the javascript you need is at dist/visitdata.js
 
 ## Usage
 
-I'm loading this from a CDN, but you might want to host the file yourself.
-
 ```html
-<script src="https://cdn.visitdatajs.com/latest/visitdata.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js"></script>
 <script>console.log(visitData.get());</script>
 ```
 

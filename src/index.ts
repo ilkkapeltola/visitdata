@@ -3,8 +3,14 @@ import searchEngineConfig from './search_engines.json';
 // second-level-domains that will be treated as exceptions
 import exceptionSLDs from './exception_slds.json';
 
+interface visitDataInterface {
+  [key: string]: string;
+}
 
 export function rawData() {
+
+  const cachedData = sessionStorage.getItem('_vdjs_raw')
+  if (cachedData) return JSON.parse( Buffer.from(cachedData, 'base64').toString('utf-8'))
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
   const referrer: string = document.referrer;
@@ -21,10 +27,10 @@ export function rawData() {
   // checks referring domain for common search engines, and when found, results in organic
   const searchEngineData = getSearchEngineData(referringDomain, urlParamsObject, searchEngineConfig);
   // set referring domain if present
-  const referralData = referringDomain == null ? null : { medium: "referral", source: referringDomain };
+  const referralData = referringDomain == null ? null : { medium: "referral", source: referringDomain } as visitDataInterface;
   
 
-  return {
+  const newData = {
     'this_hostname': document.location.origin || "localhost",
     'this_domain': getDomain_(document.location.origin) || "localhost",
     'referring_hostname': referrer || null,
@@ -36,6 +42,9 @@ export function rawData() {
     "organic_search_data": searchEngineData,
     "referral_data": referralData
   }
+
+  sessionStorage.setItem('_vdjs_raw', Buffer.from(JSON.stringify(newData)).toString('base64'));
+  return newData
 
 }
 
@@ -49,7 +58,7 @@ returns set tags.
 if no utm tags are set, returns null.
 */
 
-function getUtmTags(urlParamsObject: urlParamsObjectInterface) : any {
+function getUtmTags(urlParamsObject: urlParamsObjectInterface) : visitDataInterface {
   const utmTagMap: {[key: string] : string} = {
     utm_source: "source",
     utm_medium: "medium",
@@ -59,7 +68,7 @@ function getUtmTags(urlParamsObject: urlParamsObjectInterface) : any {
   }
 
   // an empty object to store found utm tags
-  let utmTagResults: {[key: string] : string}  = {};
+  let utmTagResults: visitDataInterface  = {};
 
   // iterate all url parameters, check if they are utm tags, and save in results if they are
   for (const key in urlParamsObject) {
@@ -88,7 +97,7 @@ Checks referring domain for common search engines.
 If a search query parameter is also passed, the value is used in 'term'
 */
 
-function getSearchEngineData(referringDomain: string, urlParamsObject: urlParamsObjectInterface, searchEngineConfig: searchEngineConfigInterface): any {
+function getSearchEngineData(referringDomain: string, urlParamsObject: urlParamsObjectInterface, searchEngineConfig: searchEngineConfigInterface): visitDataInterface {
 
   if (referringDomain == null) return null;
 
@@ -138,7 +147,7 @@ interface paidUrlParamsInterface {
  * If found, return the source and cpc/cpm
  */
 
-function getPaidUrlData(urlParamsObject: urlParamsObjectInterface, paidUrlParamsConfig: paidUrlParamsInterface): Object {
+function getPaidUrlData(urlParamsObject: urlParamsObjectInterface, paidUrlParamsConfig: paidUrlParamsInterface): visitDataInterface {
 
   // Return first Click Id config found. There should never be more than one anyway.
   for (const key in urlParamsObject) {
@@ -150,24 +159,24 @@ function getPaidUrlData(urlParamsObject: urlParamsObjectInterface, paidUrlParams
   return null;
 }
 
-export function get() {
+export function get(): visitDataInterface {
 
   const trafficData = rawData();
 
   // Are UTM tags present?
-  return  trafficData.utm_tags ||
+  return  trafficData.utm_tags as visitDataInterface ||
     // or is the traffic paid?
-    trafficData.paid_url_data ||
+    trafficData.paid_url_data as visitDataInterface ||
     // is it an organic search engine traffic?
-    trafficData.organic_search_data ||
+    trafficData.organic_search_data as visitDataInterface ||
     // or is it a referral?
-    trafficData.referral_data ||
+    trafficData.referral_data as visitDataInterface ||
     // if not, it's direct
     {
       'source': '(direct)',
       'medium': '(none)',
       'campaign': '(not set)'
-    };  
+    } as visitDataInterface;
 }
 
 /**

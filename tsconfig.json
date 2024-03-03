@@ -2,12 +2,17 @@
     "compilerOptions": {
       "outDir": "./dist/",
       "noImplicitAny": true,
-      "module": "es6",
+      "module": "esnext",
       "target": "es5",
       "declaration": true,
+      "declarationDir": "./types",
       "allowJs": true,
       "moduleResolution": "node",
       "resolveJsonModule": true,
       "esModuleInterop": true
-    }
+    },
+    "include": [
+      // Other TypeScript files and directories
+      "src"
+    ],
   }
