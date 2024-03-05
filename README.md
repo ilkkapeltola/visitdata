@@ -4,6 +4,11 @@
 
 Since there is no way to extract this information from ga.js directly, you need a library like `visitData` to do it.
 
+visitData is used on over 40 million page loads every week, just from the CDN:
+
+<img src="images/visitdata_pageloads.png" alt="visitData 40M page loads in a weeks" height="300">
+
+
 ## Questions / Contact
 
 If you have any questions for this, drop me an email at [ilkkapel@gmail.com](mailto:ilkkapel@gmail.com)
