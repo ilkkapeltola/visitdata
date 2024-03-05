@@ -37,7 +37,7 @@ the javascript you need is at dist/visitdata.js
 <script>console.log(visitData.get());</script>
 ```
 
-`visitdata.get()` will return an object like
+`visitData.get()` will return an object like
 ```json
 {
   "source": "google",
@@ -45,4 +45,4 @@ the javascript you need is at dist/visitdata.js
 }
 ```
 
-You can also run `visitdata.rawData()` which will return a lot more information
+You can also run `visitData.rawData()` which will return a lot more information

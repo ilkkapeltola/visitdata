@@ -20,7 +20,7 @@
     "tslib": "^2.6.2",
     "typescript": "^4.6.2"
   },
-  "name": "visitdatajs",
+  "name": "visitdata",
   "description": "Get traffic source data like Google Analytics",
   "version": "1.2.4",
   "main": "./dist/visitdata.cjs.js",
