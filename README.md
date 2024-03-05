@@ -1,8 +1,8 @@
 # visitData
 
-visitData emulates the source, medium, campaign, content and term data just like Google Analytics does it (ga.js).
+`visitData` emulates the source, medium, campaign, content and term data just like Google Analytics does it (ga.js).
 
-Since there is no way to extract this information from ga.js directly, you need a library like visitdata.js to do it.
+Since there is no way to extract this information from ga.js directly, you need a library like `visitData` to do it.
 
 ## Questions / Contact
 
