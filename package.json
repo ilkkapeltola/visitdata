@@ -14,6 +14,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^23.0.1",
     "rollup": "^4.12.0",
+    "rollup-plugin-dts": "^6.1.0",
     "ts-jest": "^29.1.1",
     "ts-loader": "^9.2.7",
     "tslib": "^2.6.2",
@@ -24,6 +25,7 @@
   "version": "1.2.3",
   "main": "./dist/visitdata.cjs.js",
   "module": "./dist/visitdata.esm.js",
+  "types": "./dist/visitdata.esm.d.ts",
   "files": [
     "dist"
   ],
@@ -33,10 +35,10 @@
       "require": "./dist/visitdata.cjs.js"
     }
   },
-  "types": "./dist/types/index.d.ts",
-  "unpkg": "dist/visitdata.umd.js",
+
+  "unpkg": "./dist/visitdata.umd.js",
   "scripts": {
-    "build": "rm -rf dist/* && npx rollup -c",
+    "build": "rm -rf dist/* && npx rollup -c && rm -rf dist/types",
     "test": "jest"
   },
   "repository": {
