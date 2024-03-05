@@ -14,6 +14,7 @@ visitData is used on over 40 million page loads every week, just from the CDN:
 If you have any questions for this, drop me an email at [ilkkapel@gmail.com](mailto:ilkkapel@gmail.com)
 
 ## Include from cdn
+:warning: note, the CDN location has changed. Read why from the [Announcement](https://github.com/ilkkapeltola/visitdata/discussions/3).
 
 Here's the file you can include in your web page directly from CDN:
 https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js
