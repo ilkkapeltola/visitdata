@@ -22,7 +22,7 @@
   },
   "name": "visitdatajs",
   "description": "Get traffic source data like Google Analytics",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "./dist/visitdata.cjs.js",
   "module": "./dist/visitdata.esm.js",
   "types": "./dist/visitdata.esm.d.ts",
