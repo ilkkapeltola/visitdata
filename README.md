@@ -40,8 +40,6 @@ npm install
 npm run build
 ```
 
-the javascript you need is at dist/visitdata.js
-
 ## Usage
 
 ```html
