@@ -19,6 +19,12 @@ If you have any questions for this, drop me an email at [ilkkapel@gmail.com](mai
 Here's the file you can include in your web page directly from CDN:
 https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js
 
+## Supported module formats
+
+- CommonJS: https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.cjs.js
+- UMD: https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js
+- ESM: https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.esm.js
+
 ## Install with npm
 
 ```
@@ -41,6 +47,14 @@ the javascript you need is at dist/visitdata.js
 ```html
 <script src="https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js"></script>
 <script>console.log(visitData.get());</script>
+
+<!-- or, and this you can copy into a javascript console without the <script> tag too for testing -->
+
+<script>
+  await import('https://cdn.jsdelivr.net/npm/visitdata/dist/visitdata.umd.js')
+  console.log(visitData.get())
+</script>
+
 ```
 
 `visitData.get()` will return an object like
@@ -52,3 +66,5 @@ the javascript you need is at dist/visitdata.js
 ```
 
 You can also run `visitData.rawData()` which will return a lot more information
+
+The results are cached with sessionStorage, so subsequent page views in the same session will return the original result.
