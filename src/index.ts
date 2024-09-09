@@ -52,6 +52,30 @@ interface urlParamsObjectInterface {
   [key: string]: string
 }
 
+interface urlParameterMapInterface {
+  [key: string]: string
+}
+
+interface optionsInterface {
+  utmTagMap: urlParameterMapInterface
+}
+
+let options = {
+  urlTagMap: {
+    utm_source: "source",
+    utm_medium: "medium",
+    utm_campaign: "campaign",
+    utm_content: "content",
+    utm_term: "term"
+  } as urlParameterMapInterface
+}
+
+export function setOption(key: string, value: any) {
+  if (key == "url_parameters") {
+    options.urlTagMap = value;
+  }
+}
+
 /*
 checks the url parameters for utm tags.
 returns set tags.
@@ -59,21 +83,15 @@ if no utm tags are set, returns null.
 */
 
 function getUtmTags(urlParamsObject: urlParamsObjectInterface) : visitDataInterface {
-  const utmTagMap: {[key: string] : string} = {
-    utm_source: "source",
-    utm_medium: "medium",
-    utm_campaign: "campaign",
-    utm_content: "content",
-    utm_term: "term"
-  }
+  const urlTagMap = options.urlTagMap;
 
   // an empty object to store found utm tags
   let utmTagResults: visitDataInterface  = {};
 
   // iterate all url parameters, check if they are utm tags, and save in results if they are
   for (const key in urlParamsObject) {
-    if (utmTagMap.hasOwnProperty(key)) {
-      utmTagResults[utmTagMap[key]] = urlParamsObject[key];
+    if (urlTagMap.hasOwnProperty(key)) {
+      utmTagResults[urlTagMap[key]] = urlParamsObject[key];
     }
   }
 
