@@ -7,10 +7,26 @@ interface visitDataInterface {
   [key: string]: string;
 }
 
+function toBase64(str: string): string {
+  if (typeof window === 'undefined') {
+    return Buffer.from(str).toString('base64')
+  } else {
+    return window.btoa(str);
+  }
+}
+
+function fromBase64(str: string): string {
+  if (typeof window === 'undefined') {
+    return Buffer.from(str, 'base64').toString('utf-8')
+  } else {
+    return window.atob(str);
+  }
+}
+
 export function rawData() {
 
   const cachedData = sessionStorage.getItem('_vdjs_raw')
-  if (cachedData) return JSON.parse( Buffer.from(cachedData, 'base64').toString('utf-8'))
+  if (cachedData && options.cache) return JSON.parse(fromBase64(cachedData));
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
   const referrer: string = document.referrer;
@@ -43,13 +59,41 @@ export function rawData() {
     "referral_data": referralData
   }
 
-  sessionStorage.setItem('_vdjs_raw', Buffer.from(JSON.stringify(newData)).toString('base64'));
+  sessionStorage.setItem('_vdjs_raw', toBase64(JSON.stringify(newData)));
   return newData
 
 }
 
 interface urlParamsObjectInterface {
   [key: string]: string
+}
+
+interface urlParameterMapInterface {
+  [key: string]: string
+}
+
+interface optionsInterface {
+  utmTagMap: urlParameterMapInterface,
+  cache: boolean
+}
+
+let options = {
+  urlTagMap: {
+    utm_source: "source",
+    utm_medium: "medium",
+    utm_campaign: "campaign",
+    utm_content: "content",
+    utm_term: "term"
+  } as urlParameterMapInterface,
+  cache: true
+}
+
+export function setOption(key: string, value: any) {
+  if (key == "url_parameters") {
+    options.urlTagMap = value;
+  } else if (key == "cache") {
+    options.cache = value;
+  }
 }
 
 /*
@@ -59,21 +103,15 @@ if no utm tags are set, returns null.
 */
 
 function getUtmTags(urlParamsObject: urlParamsObjectInterface) : visitDataInterface {
-  const utmTagMap: {[key: string] : string} = {
-    utm_source: "source",
-    utm_medium: "medium",
-    utm_campaign: "campaign",
-    utm_content: "content",
-    utm_term: "term"
-  }
+  const urlTagMap = options.urlTagMap;
 
   // an empty object to store found utm tags
   let utmTagResults: visitDataInterface  = {};
 
   // iterate all url parameters, check if they are utm tags, and save in results if they are
   for (const key in urlParamsObject) {
-    if (utmTagMap.hasOwnProperty(key)) {
-      utmTagResults[utmTagMap[key]] = urlParamsObject[key];
+    if (urlTagMap.hasOwnProperty(key)) {
+      utmTagResults[urlTagMap[key]] = urlParamsObject[key];
     }
   }
 

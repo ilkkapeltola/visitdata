@@ -1,3 +1,4 @@
 node_modules
 dist
 *.bat
+test_page

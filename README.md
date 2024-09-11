@@ -66,3 +66,44 @@ npm run build
 You can also run `visitData.rawData()` which will return a lot more information
 
 The results are cached with sessionStorage, so subsequent page views in the same session will return the original result.
+
+## Options
+
+| option | what it does | value |
+| -- | -- | -- |
+| cache | disable caching | `true` or `false` |
+| url_parameters | pick custom url parameters | e.g. ```{'utm_campaign': 'campaign', 'urlparam_custom': 'custom'}``` |
+
+### cache
+The first time `visitdata` `get()` or `rawData()` is called, the library will store the results into `sessionStorage`, so that subsequent pageviews in the same session will return the original results from cache.
+
+During testing, or for some other reason, you might want to disable caching. You can do that by calling
+```
+visitData.setOption('cache', false)
+```
+
+### url_parameters
+
+By default, `visitData` assumes your URL can have standard UTM parameters such as `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` and `utm_term`. However, you might want to pick custom parameters additionally.
+
+For example, let's say you actually want to track a `campaign_id` instead of `utm_campaign`. You might do something like this: 
+
+```
+visitData.setOption('url_parameters', {
+    'utm_medium': 'medium',
+    'utm_source': 'source',
+    'utm_campaign': 'campaign',
+    'campaign_id': 'campaign_id'
+})
+```
+
+Now, calling `visitData.get()` will return an object like:
+
+```
+{
+  'medium': 'cpc',
+  'source: 'google',
+  'campaign: 'My campaign',
+  'campaign_id': '1241234'
+}
+```
