@@ -72,7 +72,7 @@ The results are cached with sessionStorage, so subsequent page views in the same
 | option | what it does | value |
 | -- | -- | -- |
 | cache | disable caching | `true` or `false` |
-| url_parameters | pick custom url parameters | e.g. ```{'utm_campaign': 'campaign', 'urlparam_custom': 'custom'}``` |
+| url_parameters | pick custom url parameters | e.g. ```{campaign: ['campaign', 'utm_campaign'], urlparam_custom: ['custom']}``` |
 
 ### cache
 The first time `visitdata` `get()` or `rawData()` is called, the library will store the results into `sessionStorage`, so that subsequent pageviews in the same session will return the original results from cache.
@@ -86,16 +86,17 @@ visitData.setOption('cache', false)
 
 By default, `visitData` assumes your URL can have standard UTM parameters such as `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` and `utm_term`. However, you might want to pick custom parameters additionally.
 
-For example, let's say you actually want to track a `campaign_id` instead of `utm_campaign`. You might do something like this: 
+For example, let's say you actually want to track a `campaign_id` instead of `utm_campaign` and sometimes your medium might be in a parameter called `custom_medium`. You might do something like this: 
 
 ```
 visitData.setOption('url_parameters', {
-    'utm_medium': 'medium',
-    'utm_source': 'source',
-    'utm_campaign': 'campaign',
-    'campaign_id': 'campaign_id'
+    'medium': ['utm_medium', 'custom_medium'],
+    'source': ['utm_source'],
+    'campaign': ['utm_campaign'],
+    'campaign_id': ['campaign_id']
 })
 ```
+note that the value of each key needs to be a list.
 
 Now, calling `visitData.get()` will return an object like:
 

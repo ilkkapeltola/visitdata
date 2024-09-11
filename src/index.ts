@@ -69,7 +69,7 @@ interface urlParamsObjectInterface {
 }
 
 interface urlParameterMapInterface {
-  [key: string]: string
+  [key: string]: [string]
 }
 
 interface optionsInterface {
@@ -79,11 +79,11 @@ interface optionsInterface {
 
 let options = {
   urlTagMap: {
-    utm_source: "source",
-    utm_medium: "medium",
-    utm_campaign: "campaign",
-    utm_content: "content",
-    utm_term: "term"
+    source: ["utm_source"],
+    medium: ["utm_medium"],
+    campaign: ["utm_campaign"],
+    content: ["utm_content"],
+    term: ["utm_term"]
   } as urlParameterMapInterface,
   cache: true
 }
@@ -105,15 +105,22 @@ if no utm tags are set, returns null.
 function getUtmTags(urlParamsObject: urlParamsObjectInterface) : visitDataInterface {
   const urlTagMap = options.urlTagMap;
 
-  // an empty object to store found utm tags
-  let utmTagResults: visitDataInterface  = {};
-
-  // iterate all url parameters, check if they are utm tags, and save in results if they are
+    // iterate all url parameters, check if they are utm tags, and save in results if they are
+  /*
   for (const key in urlParamsObject) {
     if (urlTagMap.hasOwnProperty(key)) {
       utmTagResults[urlTagMap[key]] = urlParamsObject[key];
     }
   }
+  */
+
+  const utmTagResults = Object.entries(urlTagMap).reduce((acc, [key, values]) => {
+    const foundKey = values.find(value => urlParamsObject.hasOwnProperty(value));
+    if (foundKey) {
+        acc[key] = urlParamsObject[foundKey];
+    }
+    return acc;
+  }, {} as visitDataInterface);
 
   // return found UTM tags, or null if empty
   if (Object.keys(utmTagResults).length > 0)
