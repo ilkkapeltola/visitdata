@@ -26,7 +26,7 @@ function fromBase64(str: string): string {
 export function rawData() {
 
   const cachedData = sessionStorage.getItem('_vdjs_raw')
-  if (cachedData) return JSON.parse(fromBase64(cachedData));
+  if (cachedData && options.cache) return JSON.parse(fromBase64(cachedData));
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
   const referrer: string = document.referrer;
@@ -73,7 +73,8 @@ interface urlParameterMapInterface {
 }
 
 interface optionsInterface {
-  utmTagMap: urlParameterMapInterface
+  utmTagMap: urlParameterMapInterface,
+  cache: boolean
 }
 
 let options = {
@@ -83,12 +84,15 @@ let options = {
     utm_campaign: "campaign",
     utm_content: "content",
     utm_term: "term"
-  } as urlParameterMapInterface
+  } as urlParameterMapInterface,
+  cache: true
 }
 
 export function setOption(key: string, value: any) {
   if (key == "url_parameters") {
     options.urlTagMap = value;
+  } else if (key == "cache") {
+    options.cache = value;
   }
 }
 
