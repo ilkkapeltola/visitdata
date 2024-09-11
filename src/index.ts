@@ -7,10 +7,26 @@ interface visitDataInterface {
   [key: string]: string;
 }
 
+function toBase64(str: string): string {
+  if (typeof window === 'undefined') {
+    return Buffer.from(str).toString('base64')
+  } else {
+    return window.btoa(str);
+  }
+}
+
+function fromBase64(str: string): string {
+  if (typeof window === 'undefined') {
+    return Buffer.from(str, 'base64').toString('utf-8')
+  } else {
+    return window.atob(str);
+  }
+}
+
 export function rawData() {
 
   const cachedData = sessionStorage.getItem('_vdjs_raw')
-  if (cachedData) return JSON.parse( Buffer.from(cachedData, 'base64').toString('utf-8'))
+  if (cachedData) return JSON.parse(fromBase64(cachedData));
 
   // this bit strips the protocol away from referrer, since psl doesn't want that
   const referrer: string = document.referrer;
@@ -43,7 +59,7 @@ export function rawData() {
     "referral_data": referralData
   }
 
-  sessionStorage.setItem('_vdjs_raw', Buffer.from(JSON.stringify(newData)).toString('base64'));
+  sessionStorage.setItem('_vdjs_raw', toBase64(JSON.stringify(newData)));
   return newData
 
 }
