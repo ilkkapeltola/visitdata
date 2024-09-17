@@ -3,7 +3,7 @@ import searchEngineConfig from './search_engines.json';
 // second-level-domains that will be treated as exceptions
 import exceptionSLDs from './exception_slds.json';
 
-interface visitDataInterface {
+export interface visitDataInterface {
   [key: string]: string;
 }
 
@@ -68,7 +68,7 @@ interface urlParamsObjectInterface {
   [key: string]: string
 }
 
-interface urlParameterMapInterface {
+export interface urlParameterMapInterface {
   [key: string]: [string]
 }
 
